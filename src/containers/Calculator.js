@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 
 import { functionKeys, digitKeys, operatorKeys } from 'utils/constants';
+import calculatorOperations from 'utils/calculatorOperations';
 
 const Calculator = () => {
+  const [value, setValue] = useState(null);
   const [displayValue, setDisplayValue] = useState('0');
+  const [operator, setOperator] = useState(null);
+  const [waitingForOperand, setWaitingForOperand] = useState(false);
 
   // Clear all state and set displayValue to 0
   const clearAll = () => {
+    setValue(null);
     setDisplayValue('0');
+    setOperator(null);
+    setWaitingForOperand(false);
   }
 
   /**
@@ -25,11 +32,37 @@ const Calculator = () => {
    * @param {number} digit - Digit value from keypad 
    */
   const inputDigit = digit => () => {
-    setDisplayValue(
-      displayValue === '0'
-        ? String(digit)
-        : displayValue + digit
-    );
+    if (waitingForOperand) {
+      setDisplayValue(String(digit));
+      setWaitingForOperand(false);
+    } else {
+      setDisplayValue(
+        displayValue === '0'
+          ? String(digit)
+          : displayValue + digit
+      );
+    }
+  }
+
+  /**
+   * Calculate operation
+   * @param {string} nextOperator - Operator type from keypad
+   */
+  const performOperation = nextOperator => () => {
+    const inputValue = parseInt(displayValue);
+
+    if (value === null) {
+      setValue(inputValue);
+    } else if (operator) {
+      const currentValue = value || 0;
+      const newValue = calculatorOperations[operator](currentValue, inputValue)
+
+      setValue(newValue);
+      setDisplayValue(String(newValue));
+    }
+
+    setWaitingForOperand(true);
+    setOperator(nextOperator);
   }
 
   // Calculator function options
@@ -53,6 +86,8 @@ const Calculator = () => {
   const determineAction = key => {
     if (/\d/.test(key)) {
       return inputDigit(key)
+    } else if (/\W/.test(key) || key === 'x') {
+      return performOperation(key)
     } else {
       return runFunctions(key)
     }
