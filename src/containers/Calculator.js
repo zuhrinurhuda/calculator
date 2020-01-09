@@ -4,6 +4,21 @@ import { functionKeys, digitKeys, operatorKeys } from 'utils/constants';
 
 const Calculator = () => {
   const [displayValue, setDisplayValue] = useState('0');
+
+  // Clear all state and set displayValue to 0
+  const clearAll = () => {
+    setDisplayValue('0');
+  }
+
+  /**
+   * Delete last digit at displayValue
+   * if displayValue length is 1 then
+   * set displayValue to 0
+   */
+  const deleteLastDigit = () => {
+    const newValue = displayValue.substring(0, displayValue.length - 1) || '0';
+    setDisplayValue(newValue);
+  }
   
   /**
    * Add digit to displayValue
@@ -17,6 +32,20 @@ const Calculator = () => {
     );
   }
 
+  // Calculator function options
+  const calculatorFunctions = {
+    ac: () => clearAll(),
+    del: () => deleteLastDigit(),
+  }
+
+  /**
+   * Invoke calculator function
+   * @param {string} key - Function key from keypad
+   */
+  const runFunctions = key => () => {
+    setDisplayValue(calculatorFunctions[key.toLowerCase()]);
+  }
+
   /**
    * Determine keypad action
    * @param {number | string} key -  Key from constants
@@ -24,6 +53,8 @@ const Calculator = () => {
   const determineAction = key => {
     if (/\d/.test(key)) {
       return inputDigit(key)
+    } else {
+      return runFunctions(key)
     }
   }
 
