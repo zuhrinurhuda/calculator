@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { functionKeys, digitKeys, operatorKeys } from 'utils/constants';
 import calculatorOperations from 'utils/calculatorOperations';
+import primeNumbers from 'utils/primeNumbers';
 
 const Calculator = () => {
   const [value, setValue] = useState(null);
@@ -67,6 +68,7 @@ const Calculator = () => {
 
   // Calculator function options
   const calculatorFunctions = {
+    prime: value => primeNumbers(value),
     ac: () => clearAll(),
     del: () => deleteLastDigit(),
   }
