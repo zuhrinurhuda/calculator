@@ -1,25 +1,15 @@
 import styled from 'styled-components';
 
 export const KeypadContainer = styled.div`
-  width: 320px;
-  height: 520px;
-
-  #prime,
-  #fibonacci,
-  #zero {
-    width: 160px;
-  }
-
   button {
+    color: #e6e7e7;
+    font-size: 2em;
     width: 80px;
     height: 80px;
-    background: none;
-    border: none;
-    padding: 0;
-    user-select: none;
-    outline: none;
-    cursor: pointer;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    line-height: 80px;
+    text-align: center;
+    border-top: 1px solid #313339;
+    border-right: 1px solid #313339;
   }
 
   button:active {
@@ -27,14 +17,35 @@ export const KeypadContainer = styled.div`
   }
 `;
 
-export const FunctionKeys = styled.div``;
+export const KeypadWrapper = styled.div`
+  display: flex;
+`;
+
+export const FunctionKeys = styled.div`
+  button {
+    width: 160px;
+    background: #3b3d40;
+  }
+`;
 
 export const DigitKeys = styled.div`
   width: 240px;
   display: flex;
   flex-wrap: wrap-reverse;
+
+  button {
+    background: #5b5d60;
+  }
+
+  #zero {
+    width: 160px;
+  }
 `;
 
 export const OperatorKeys = styled.div`
   width: 80px;
+
+  button {
+    background:  #1e89da;
+  }
 `;

@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { functionKeys, digitKeys, operatorKeys } from 'utils/constants';
+
 import {
   KeypadContainer,
   FunctionKeys,
+  KeypadWrapper,
   DigitKeys,
   OperatorKeys
 } from './styles';
@@ -51,14 +53,14 @@ const Keypad = props => {
       <FunctionKeys>
         {generateKeypad(functionKeys)}
       </FunctionKeys>
-      <div style={{ display: 'flex' }}>
+      <KeypadWrapper>
         <DigitKeys>
           {generateKeypad(digitKeys)}
         </DigitKeys>
         <OperatorKeys>
           {generateKeypad(operatorKeys)}
         </OperatorKeys>
-      </div>
+      </KeypadWrapper>
     </KeypadContainer>
   )
 };
