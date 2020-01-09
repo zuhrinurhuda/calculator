@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Keypad } from 'components';
+import { Keypad, Display } from 'components';
 import calculatorOperations from 'utils/calculatorOperations';
 import primeNumbers from 'utils/primeNumbers';
 import fibonacciNumbers from 'utils/fibonacciNumbers';
@@ -85,7 +85,7 @@ const Calculator = () => {
 
   return (
     <div id="calculator">
-      <div id="calculator-display">{displayValue}</div>
+      <Display displayValue={displayValue} />
       <Keypad
         inputDigit={inputDigit}
         performOperation={performOperation}
