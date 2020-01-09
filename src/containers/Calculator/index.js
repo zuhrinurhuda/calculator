@@ -5,6 +5,8 @@ import calculatorOperations from 'utils/calculatorOperations';
 import primeNumbers from 'utils/primeNumbers';
 import fibonacciNumbers from 'utils/fibonacciNumbers';
 
+import CalculatorContainer from './styles';
+
 const Calculator = () => {
   const [value, setValue] = useState(null);
   const [displayValue, setDisplayValue] = useState('0');
@@ -84,14 +86,14 @@ const Calculator = () => {
   }
 
   return (
-    <div id="calculator">
+    <CalculatorContainer>
       <Display displayValue={displayValue} />
       <Keypad
         inputDigit={inputDigit}
         performOperation={performOperation}
         runFunctions={runFunctions}
       />
-    </div>
+    </CalculatorContainer>
   );
 };
 
