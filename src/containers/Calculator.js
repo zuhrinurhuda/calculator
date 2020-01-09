@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { functionKeys, digitKeys, operatorKeys } from 'utils/constants';
 
 const Calculator = () => {
+  const [displayValue, setDisplayValue] = useState('0');
+  
+  /**
+   * Add digit to displayValue
+   * @param {number} digit - Digit value from keypad 
+   */
+  const inputDigit = digit => () => {
+    setDisplayValue(
+      displayValue === '0'
+        ? String(digit)
+        : displayValue + digit
+    );
+  }
+
+  /**
+   * Determine keypad action
+   * @param {number | string} key -  Key from constants
+   */
+  const determineAction = key => {
+    if (/\d/.test(key)) {
+      return inputDigit(key)
+    }
+  }
+
   /**
    * Looping button as many keys for create calculator keypad
    * @param {Object} data - Object of keys
@@ -13,6 +37,7 @@ const Calculator = () => {
         key={key}
         id={`key-${key.toLowerCase()}`}
         className="key-pad"
+        onClick={determineAction(data[key])}
       >
         {data[key]}
       </button>
@@ -24,6 +49,7 @@ const Calculator = () => {
       width: 320,
       height: 520,
     }}>
+      <div>{displayValue}</div>
       <div>
         {generateKeypad(functionKeys)}
       </div>
