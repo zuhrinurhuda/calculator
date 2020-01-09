@@ -11,10 +11,6 @@ export const KeypadContainer = styled.div`
     border-top: 1px solid #313339;
     border-right: 1px solid #313339;
   }
-
-  button:active {
-    box-shadow: inset 0 0 80px 0 rgba(0, 0, 0, 0.25);
-  }
 `;
 
 export const KeypadWrapper = styled.div`

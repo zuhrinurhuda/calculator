@@ -22,7 +22,7 @@ const primeNumbers = n => {
     }
   }
 
-  return arrPrime.join(', ');
+  return arrPrime.join(',') || '0';
 };
 
 export default primeNumbers;

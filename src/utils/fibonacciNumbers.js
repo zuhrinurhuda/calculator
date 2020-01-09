@@ -18,7 +18,7 @@ const fibonacciNumbers = n => {
     arrFibonacci.push(curr);
   }
 
-  return arrFibonacci.join(', ');
+  return arrFibonacci.join(',') || '0';
 }
 
 export default fibonacciNumbers;
